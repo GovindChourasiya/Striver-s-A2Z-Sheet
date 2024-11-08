@@ -1,0 +1,16 @@
+class Solution {
+    public int[] dp;
+    public Solution(){
+        dp = new int[46];
+        Arrays.fill(dp,-1);
+    }
+    public int climbStairs(int n) {
+        if(n == 0) return 1;
+        if(n == 1) return 1;
+        if(dp[n] != -1) return dp[n];
+        int left = climbStairs(n-1);
+        int right = climbStairs(n-2);
+
+        return dp[n] = left+right;
+    }
+}
