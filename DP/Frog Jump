@@ -1,0 +1,22 @@
+class Solution{
+    public int solve(int[] arr, int N, int[] dp){
+        if(N == 0) return 0;
+        
+        if(dp[N] != -1){
+            return dp[N];
+        }
+        int left = solve(arr,N-1,dp) + Math.abs(arr[N]-arr[N-1]);
+        int right = Integer.MAX_VALUE;
+        if(N > 1){
+        right = solve(arr,N-2,dp) + Math.abs(arr[N]-arr[N-2]);
+        }
+        
+        return dp[N] = Math.min(left,right);
+    }
+    public int minimumEnergy(int arr[],int N){
+        int[] dp = new int[N+1];
+        Arrays.fill(dp,-1);
+        //code here
+        return solve(arr,N-1,dp);
+    }
+}
