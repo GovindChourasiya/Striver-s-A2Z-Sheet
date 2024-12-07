@@ -1,0 +1,28 @@
+class Solution {
+    public int[] getFloorAndCeil(int x, int[] arr) {
+        // code here
+        Arrays.sort(arr);
+        
+        int l = 0;
+        int r = arr.length-1;
+        int floor = -1;
+        int ceil = -1;
+        
+        while(l <= r){
+            int mid = l + (r-l)/2;
+            if(arr[mid] == x){
+                return new int[]{x,x};
+            }
+            if(arr[mid] <= x){
+                floor = arr[mid];
+                l = mid+1;
+            }
+            else{
+                ceil = arr[mid];
+                r = mid-1;
+            }
+        }
+        
+        return new int[]{floor,ceil};
+    }
+}
