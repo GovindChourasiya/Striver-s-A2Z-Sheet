@@ -1,0 +1,26 @@
+class Solution {
+    // Function to calculate the number of subsets with a given sum
+    public int solve(int[] nums,int idx, int target, int[][] dp){
+        if(target < 0){
+            return 0;
+        }
+        if(idx == nums.length){
+            return (target == 0 ? 1 : 0);
+        }
+        if(dp[idx][target] != -1){
+            return dp[idx][target];
+        }
+        int pick = solve(nums,idx+1,target-nums[idx],dp);
+        int unpick = solve(nums,idx+1,target,dp);
+        
+        return dp[idx][target] = pick+unpick;
+    }
+    public int perfectSum(int[] nums, int target) {
+        int[][] dp = new int[nums.length][target+1];
+        for(int[] arr : dp){
+            Arrays.fill(arr,-1);
+        }
+        // code here
+        return solve(nums,0,target,dp);
+    }
+}
